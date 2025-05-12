@@ -43,7 +43,7 @@ if (dots.length > 0) {
     bannerText.innerHTML = slides[0].tagLine;
 }
 
-let leftArrow=document.getElementById("arrow_left");
+let leftArrow=document.querySelector(".arrow_left");
 	leftArrow.addEventListener("click", function(){
 		console.log("précédent");
 		dots[index].classList.remove("dot_selected");
@@ -58,7 +58,7 @@ let leftArrow=document.getElementById("arrow_left");
 		console.log(index);
 	});
 
-let rightArrow=document.getElementById("arrow_right");
+let rightArrow=document.querySelector(".arrow_right");
 	rightArrow.addEventListener("click", function(){
 		console.log("suivant");
 		//supprimer la classe dot_selected de l'élément actuel
