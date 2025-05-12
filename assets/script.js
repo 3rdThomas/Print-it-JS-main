@@ -18,36 +18,65 @@ const slides = [
 ]
 //indice de la diapo actuelle
 let index = 0;
+//classe de l'image de la bannière
+const bannerImage = document.querySelector(".banner-img");
+//classe de la div qui contient le texte de la bannière
+const bannerText = document.querySelector("#banner p");
+//recuperer la classe de la div qui contient les points
+let dotsDiv=document.querySelector(".dots");
+//variable qui contient le code HTML de la div qui contiendra les points
+let dotCode ="<div class='dot'></div>"
+//tableau qui contiendra les points
+let dots = [];
+
+//boucle pour créer les points
+for (let i = 0; i < slides.length; i++) {
+    const dot = document.createElement("div");
+    dot.classList.add("dot");
+    dotsDiv.appendChild(dot);
+    dots.push(dot);
+}
+
+if (dots.length > 0) {
+    dots[0].classList.add("dot_selected");
+    bannerImage.src = `./assets/images/slideshow/${slides[0].image}`;
+    bannerText.innerHTML = slides[0].tagLine;
+}
 
 let leftArrow=document.getElementById("arrow_left");
 	leftArrow.addEventListener("click", function(){
 		console.log("précédent");
+		dots[index].classList.remove("dot_selected");
 		index--;
 		//si l'index est inférieur à 0, on le remet à la longueur du tableau - 1
     	if (index < 0) {
         index = slides.length - 1;
     	}
+		dots[index].classList.add("dot_selected");
+		bannerImage.src = `./assets/images/slideshow/${slides[index].image}`;
+		bannerText.innerHTML = slides[index].tagLine;
 		console.log(index);
 	});
 
 let rightArrow=document.getElementById("arrow_right");
 	rightArrow.addEventListener("click", function(){
 		console.log("suivant");
+		//supprimer la classe dot_selected de l'élément actuel
+		dots[index].classList.remove("dot_selected");
 		index++;
 		//si l'index est supérieur ou égal à la longueur du tableau, on le remet à 0
 		if (index >= slides.length) {
 			index = 0;
 		}
+		//ajouter la classe dot_selected à l'élément suivant
+		dots[index].classList.add("dot_selected");
+		//modifier l'image de la bannière
+		bannerImage.src = `./assets/images/slideshow/${slides[index].image}`;
+		//modifier le texte de la bannière
+		bannerText.innerHTML = slides[index].tagLine;
 		console.log(index);
 	});
 
-//recuperer la classe de la div qui contient les points
-let dotsDiv=document.querySelector(".dots");
 
-//variable qui contient le code HTML de la div qui contiendra les points
-let dotCode ="<div class='dot'></div>"
 
-//boucle pour créer les points
-for (let i=0; i<slides.length; i++){
-	dotsDiv.innerHTML+=dotCode;
-}
+
