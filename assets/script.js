@@ -16,13 +16,38 @@ const slides = [
 		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
 	}
 ]
+//indice de la diapo actuelle
+let index = 0;
 
 let leftArrow=document.getElementById("arrow_left");
 	leftArrow.addEventListener("click", function(){
-		console.log("clic gauche");
+		console.log("précédent");
+		index--;
+		//si l'index est inférieur à 0, on le remet à la longueur du tableau - 1
+    	if (index < 0) {
+        index = slides.length - 1;
+    	}
+		console.log(index);
 	});
-	
+
 let rightArrow=document.getElementById("arrow_right");
 	rightArrow.addEventListener("click", function(){
-		console.log("clic droit");
+		console.log("suivant");
+		index++;
+		//si l'index est supérieur ou égal à la longueur du tableau, on le remet à 0
+		if (index >= slides.length) {
+			index = 0;
+		}
+		console.log(index);
 	});
+
+//recuperer la classe de la div qui contient les points
+let dotsDiv=document.querySelector(".dots");
+
+//variable qui contient le code HTML de la div qui contiendra les points
+let dotCode ="<div class='dot'></div>"
+
+//boucle pour créer les points
+for (let i=0; i<slides.length; i++){
+	dotsDiv.innerHTML+=dotCode;
+}
